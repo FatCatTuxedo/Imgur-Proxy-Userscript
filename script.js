@@ -2,7 +2,7 @@
 // @name         Imgur Proxy
 // @namespace    http://tampermonkey.net/
 // @version      1
-// @description  redirects imgur <img> tags to a randomly selected rimgo instance
+// @description  redirects imgur <img> tags via duckduckgo proxy
 // @author       FatCatTuxedo
 // @match        *://*/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=imgur.com
