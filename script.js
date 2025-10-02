@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         Imgur Proxy
+// @name         imgur proxy
 // @namespace    http://tampermonkey.net/
 // @version      1
-// @description  redirects imgur <img> tags via duckduckgo proxy
+// @description  redirects imgur <img> tags via a proxy
 // @author       FatCatTuxedo
 // @match        *://*/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=imgur.com
@@ -14,15 +14,6 @@
 
 (function() {
     'use strict';
-
-    const generateHash = (string) => { // hash, to allow us to cache images easier and reduce load on
-        let hash = 0;
-        for (const char of string) {
-            hash = (hash << 5) - hash + char.charCodeAt(0);
-            hash |= 0; // Constrain to 32bit integer
-        }
-        return hash;
-    };
 
     const observer = new MutationObserver((mutations) => {
         for (const mutation of mutations) {
@@ -83,5 +74,13 @@
               elem.src = "https://proxy.duckduckgo.com/iu/?u=" + imgsrc;
           };
     };
+
+            try {
+
+                walk(document.body)
+                observer.observe(document.body, observerConfig);
+            } catch (e) {
+                console.error("JSON parsing failed, no image redirecting will occur.", e);
+            }
 
 })();
